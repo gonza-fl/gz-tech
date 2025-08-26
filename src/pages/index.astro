@@ -1,0 +1,406 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ProductGrid from '../components/ProductGrid.tsx';
+
+// Fetch productos desde el JSON
+const response = await fetch('http://localhost:4321/productos.json');
+const data = await response.json();
+const productos = data.productos;
+---
+
+<Layout>
+  <!-- Header -->
+  <nav class='bg-dark-900 shadow-lg sticky top-0 z-50'>
+    <div class='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+      <div class='flex justify-between items-center h-16'>
+        <div class='flex items-center'>
+          <a href='/' class='flex items-center py-2 group'>
+            <img src='/logo.png' alt='GZ Tech' class='h-16 md:h-18 w-auto' />
+            <span
+              class='ml-4 text-2xl md:text-3xl font-orbitron font-semibold bg-gradient-to-r from-turquoise-400 to-green-modern-400 bg-clip-text text-transparent group-hover:from-turquoise-300 group-hover:to-green-modern-300 transition-all duration-300 leading-none'
+            >
+              TechStore
+            </span>
+          </a>
+        </div>
+        <div class='flex items-center space-x-4'>
+          <a
+            href='/'
+            class='text-turquoise-400 px-3 py-2 text-sm font-medium border-b-2 border-turquoise-400'
+            >Productos</a
+          >
+          <a
+            href='/carrito'
+            class='relative text-gray-300 hover:text-turquoise-400 px-3 py-2 text-sm font-medium transition-colors'
+          >
+            🛒 Carrito
+            <span
+              id='cart-badge'
+              class='absolute -top-1 -right-1 bg-turquoise-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center hidden'
+              >0</span
+            >
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id='hero' class='hero py-10 md:py-12 relative overflow-hidden'>
+    <!-- Efecto Lámpara de Lava -->
+    <div class='lava-lamp opacity-45'>
+      <div class='blob blob-1'></div>
+      <div class='blob blob-2 hidden md:block'></div>
+      <div class='blob blob-3'></div>
+      <div class='blob blob-4 hidden md:block'></div>
+      <div class='blob blob-5'></div>
+    </div>
+
+    <!-- Contenido del Hero -->
+    <div class='relative z-10 max-w-7xl mx-auto px-4 text-center'>
+      <h1
+        class='text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight'
+      >
+        La Tecnología que
+        <span
+          class='bg-gradient-to-r from-turquoise-400 to-green-modern-400 bg-clip-text text-transparent font-orbitron'
+        >
+          Necesitas
+        </span>
+      </h1>
+      <p
+        class='text-xl md:text-2xl text-gray-200 max-w-3xl mx-auto mb-8 leading-relaxed'
+      >
+        Productos tecnológicos a precios accesibles
+      </p>
+      <p class='text-xl md:text-2xl text-turquoise-300 font-semibold'
+        >¡Tu próximo upgrade te está esperando!</p
+      >
+    </div>
+  </section>
+
+  <!-- Filtros -->
+  <section class='py-8 bg-dark-700 border-b border-dark-600'>
+    <div class='max-w-7xl mx-auto px-4'>
+      <div class='flex flex-wrap gap-4 justify-center'>
+        <button
+          class='filter-btn active bg-turquoise-500 text-white px-6 py-2 rounded-full text-sm font-medium hover:bg-turquoise-600 transition-colors'
+          data-filter='todos'
+        >
+          Todos
+        </button>
+        <button
+          class='filter-btn bg-dark-600 text-gray-300 px-6 py-2 rounded-full text-sm font-medium hover:bg-turquoise-500 hover:text-white transition-colors'
+          data-filter='auriculares'
+        >
+          Auriculares
+        </button>
+        <button
+          class='filter-btn bg-dark-600 text-gray-300 px-6 py-2 rounded-full text-sm font-medium hover:bg-turquoise-500 hover:text-white transition-colors'
+          data-filter='parlantes'
+        >
+          Parlantes
+        </button>
+        <button
+          class='filter-btn bg-dark-600 text-gray-300 px-6 py-2 rounded-full text-sm font-medium hover:bg-turquoise-500 hover:text-white transition-colors'
+          data-filter='cargadores'
+        >
+          Cargadores
+        </button>
+        <button
+          class='filter-btn bg-dark-600 text-gray-300 px-6 py-2 rounded-full text-sm font-medium hover:bg-turquoise-500 hover:text-white transition-colors'
+          data-filter='smartwatch'
+        >
+          Smartwatch
+        </button>
+        <button
+          class='filter-btn bg-dark-600 text-gray-300 px-6 py-2 rounded-full text-sm font-medium hover:bg-turquoise-500 hover:text-white transition-colors'
+          data-filter='usb'
+        >
+          USB & Cables
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Grid de Productos -->
+  <section class='py-16 bg-dark-800'>
+    <div class='max-w-7xl mx-auto px-4'>
+      <ProductGrid productos={productos} client:load />
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section
+    class='py-16 bg-gradient-to-r from-turquoise-600 to-green-modern-600'
+  >
+    <div class='max-w-4xl mx-auto text-center px-4'>
+      <h2 class='text-3xl font-bold text-white mb-4'>
+        ¿No encontraste lo que buscabas?
+      </h2>
+      <p class='text-turquoise-100 mb-8'>
+        Contáctanos y te ayudamos a encontrar el producto perfecto
+      </p>
+      <button
+        class='bg-white text-turquoise-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors'
+      >
+        Contactar Ahora
+      </button>
+    </div>
+  </section>
+
+  <!-- SVG Filter para efecto lámpara de lava -->
+  <svg
+    xmlns='http://www.w3.org/2000/svg'
+    version='1.1'
+    style='position: absolute; width: 0; height: 0;'
+  >
+    <defs>
+      <filter id='lava-filter'>
+        <feGaussianBlur in='SourceGraphic' stdDeviation='15' result='blur'
+        ></feGaussianBlur>
+        <feColorMatrix
+          in='blur'
+          mode='matrix'
+          values='1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 18 -7'
+          result='lava'></feColorMatrix>
+        <feBlend in='SourceGraphic' in2='lava' mode='overlay'></feBlend>
+      </filter>
+    </defs>
+  </svg>
+</Layout>
+
+<script type='module'>
+  import { cartStore } from '/src/scripts/cart-store.js';
+
+  // Exponer cartStore globalmente para el componente React
+  window.cartStore = cartStore;
+
+  // Filtros de productos
+  const filterButtons = document.querySelectorAll('.filter-btn');
+
+  filterButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const filter = button.getAttribute('data-filter');
+
+      // Actualizar botones activos
+      filterButtons.forEach((btn) => {
+        btn.classList.remove('active', 'bg-turquoise-500', 'text-white');
+        btn.classList.add('bg-dark-600', 'text-gray-300');
+      });
+
+      button.classList.add('active', 'bg-turquoise-500', 'text-white');
+      button.classList.remove('bg-dark-600', 'text-gray-300');
+
+      // Filtrar productos
+      const productCards = document.querySelectorAll('.producto-card');
+      productCards.forEach((card) => {
+        const categoria = card.getAttribute('data-categoria');
+        if (filter === 'todos' || categoria === filter) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  // Funciones del carrito
+  function updateCartBadge() {
+    const badge = document.getElementById('cart-badge');
+    const totalItems = cartStore.getTotalItems();
+
+    if (totalItems > 0) {
+      badge.textContent = totalItems;
+      badge.classList.remove('hidden');
+    } else {
+      badge.classList.add('hidden');
+    }
+  }
+
+  // Inicializar badge al cargar la página
+  document.addEventListener('DOMContentLoaded', () => {
+    updateCartBadge();
+
+    // Suscribirse a cambios del carrito
+    cartStore.subscribe(() => {
+      updateCartBadge();
+    });
+  });
+</script>
+
+<style>
+  .hero {
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    background-size: 400% 400%;
+    animation: gradientMove 12s ease infinite;
+    position: relative;
+  }
+
+  .hero canvas {
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    /* width: 100% !important;
+    height: 100% !important; */
+    z-index: 1;
+    pointer-events: auto;
+  }
+
+  .lava-lamp {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    overflow: hidden;
+    filter: url('#lava-filter');
+  }
+
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.8;
+  }
+
+  .blob-1 {
+    width: 200px;
+    height: 200px;
+    background: #00ffcc;
+    top: 30%;
+    left: 20%;
+    animation: lavaMove1 8s ease-in-out infinite;
+  }
+
+  .blob-2 {
+    width: 150px;
+    height: 150px;
+    background: #14b8a6;
+    top: 50%;
+    left: 30%;
+    animation: lavaMove2 10s ease-in-out infinite 1s;
+  }
+
+  .blob-3 {
+    width: 180px;
+    height: 180px;
+    background: #22c55e;
+    bottom: 40%;
+    right: 25%;
+    animation: lavaMove3 12s ease-in-out infinite 2s;
+  }
+
+  .blob-4 {
+    width: 220px;
+    height: 220px;
+    background: #2dd4bf;
+    top: 20%;
+    right: 15%;
+    animation: lavaMove4 9s ease-in-out infinite 0.5s;
+  }
+
+  .blob-5 {
+    width: 160px;
+    height: 160px;
+    background: #16a34a;
+    bottom: 20%;
+    left: 40%;
+    animation: lavaMove5 11s ease-in-out infinite 1.5s;
+  }
+
+  @keyframes lavaMove1 {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+    33% {
+      transform: translate(80px, 60px) scale(1.2);
+    }
+    66% {
+      transform: translate(-40px, -80px) scale(0.8);
+    }
+  }
+
+  @keyframes lavaMove2 {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+    50% {
+      transform: translate(-60px, 80px) scale(1.4);
+    }
+  }
+
+  @keyframes lavaMove3 {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+    25% {
+      transform: translate(-100px, -40px) scale(0.9);
+    }
+    75% {
+      transform: translate(60px, -60px) scale(1.3);
+    }
+  }
+
+  @keyframes lavaMove4 {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+    40% {
+      transform: translate(-80px, 100px) scale(1.1);
+    }
+    80% {
+      transform: translate(40px, -70px) scale(0.7);
+    }
+  }
+
+  @keyframes lavaMove5 {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+    30% {
+      transform: translate(90px, -50px) scale(1.5);
+    }
+    70% {
+      transform: translate(-70px, 40px) scale(0.6);
+    }
+  }
+
+  @keyframes gradientMove {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .carousel-btn:hover {
+    transform: translateY(-50%) scale(1.1);
+    bg-opacity: 75;
+  }
+
+  .carousel-dot:hover {
+    opacity: 100;
+    transform: scale(1.2);
+  }
+
+  .carousel-image {
+    transition: opacity 0.3s ease-in-out;
+  }
+</style>

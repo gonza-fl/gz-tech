@@ -1,0 +1,360 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// Función para formatear precio
+function formatPrice(price) {
+  return new Intl.NumberFormat('es-AR', {
+    style: 'currency',
+    currency: 'ARS'
+  }).format(price);
+}
+---
+
+<Layout>
+  <!-- Header -->
+  <nav class="bg-dark-900 shadow-lg sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <div class="flex items-center">
+          <a href="/" class="flex items-center py-2 group">
+            <img src="/logo.png" alt="GZ Tech" class="h-16 md:h-18 w-auto">
+            <span class="ml-4 text-2xl md:text-3xl font-orbitron font-semibold bg-gradient-to-r from-turquoise-400 to-green-modern-400 bg-clip-text text-transparent group-hover:from-turquoise-300 group-hover:to-green-modern-300 transition-all duration-300 leading-none">
+              TechStore
+            </span>
+          </a>
+        </div>
+        <div class="flex items-center space-x-4">
+          <a href="/" class="text-gray-300 hover:text-turquoise-400 px-3 py-2 text-sm font-medium transition-colors">Productos</a>
+          <a href="/carrito" class="relative text-turquoise-400 px-3 py-2 text-sm font-medium border-b-2 border-turquoise-400">
+            🛒 Carrito
+            <span id="cart-badge" class="absolute -top-1 -right-1 bg-turquoise-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center hidden">0</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-dark-800 to-dark-900 py-16">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+      <div class="flex justify-center mb-6">
+        <img src="/logo.png" alt="GZ Tech" class="h-20 md:h-24 lg:h-28 w-auto">
+      </div>
+      <h1 class="text-3xl md:text-4xl font-bold text-gray-100 mb-4">
+        🛒 Tu <span class="bg-gradient-to-r from-turquoise-400 to-green-modern-400 bg-clip-text text-transparent">Carrito</span>
+      </h1>
+      <p class="text-lg text-gray-300">
+        Revisa tus productos antes de confirmar el pedido
+      </p>
+    </div>
+  </section>
+
+  <!-- Contenido del Carrito -->
+  <section class="py-16 bg-dark-800 min-h-screen">
+    <div class="max-w-4xl mx-auto px-4">
+      
+      <!-- Carrito Vacío -->
+      <div id="empty-cart" class="text-center py-16 hidden">
+        <div class="text-6xl mb-4">🛒</div>
+        <h2 class="text-2xl font-semibold text-gray-100 mb-4">Tu carrito está vacío</h2>
+        <p class="text-gray-300 mb-8">¡Explora nuestros productos y encuentra algo que te guste!</p>
+        <a href="/" class="bg-gradient-to-r from-turquoise-500 to-green-modern-500 text-white px-8 py-3 rounded-lg font-semibold hover:from-turquoise-600 hover:to-green-modern-600 transition-all">
+          Ver Productos
+        </a>
+      </div>
+
+      <!-- Lista de Productos -->
+      <div id="cart-content" class="hidden">
+        <div class="bg-dark-700 rounded-lg shadow-lg overflow-hidden border border-dark-600">
+          <!-- Header de la tabla -->
+          <div class="bg-gradient-to-r from-turquoise-600 to-green-modern-600 text-white px-6 py-4">
+            <h2 class="text-xl font-semibold">Productos en tu carrito</h2>
+          </div>
+
+          <!-- Lista de productos -->
+          <div id="cart-items" class="divide-y divide-dark-600">
+            <!-- Los productos se cargarán dinámicamente aquí -->
+          </div>
+
+          <!-- Total -->
+          <div class="bg-dark-800 px-6 py-4">
+            <div class="flex justify-between items-center text-xl font-bold">
+              <span class="text-gray-100">Total:</span>
+              <span id="cart-total" class="text-turquoise-400">$0</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Botones de Acción -->
+        <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+          <button id="clear-cart" class="bg-dark-600 text-gray-300 px-8 py-3 rounded-lg font-semibold hover:bg-dark-500 transition-colors">
+            Vaciar Carrito
+          </button>
+          <button id="checkout-whatsapp" class="bg-gradient-to-r from-green-modern-500 to-green-modern-600 text-white px-8 py-3 rounded-lg font-semibold hover:from-green-modern-600 hover:to-green-modern-700 transition-all transform hover:scale-105">
+            💬 Enviar Pedido por WhatsApp
+          </button>
+        </div>
+
+        <!-- Continuar Comprando -->
+        <div class="mt-6 text-center">
+          <a href="/" class="text-turquoise-400 hover:text-turquoise-300 font-medium">
+            ← Continuar comprando
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal de Confirmación -->
+  <div id="confirm-modal" class="fixed inset-0 z-50 hidden">
+    <!-- Overlay con blur -->
+    <div class="absolute inset-0 bg-black bg-opacity-60 backdrop-blur-sm"></div>
+    
+    <!-- Modal Content -->
+    <div class="relative z-10 flex items-center justify-center min-h-screen p-4">
+      <div class="bg-dark-700 rounded-xl shadow-2xl border border-dark-600 p-8 max-w-md w-full mx-auto transform transition-all">
+        <!-- Icono -->
+        <div class="flex justify-center mb-6">
+          <div class="w-16 h-16 bg-red-500 bg-opacity-20 rounded-full flex items-center justify-center">
+            <svg class="w-8 h-8 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+            </svg>
+          </div>
+        </div>
+        
+        <!-- Título y Mensaje -->
+        <div class="text-center mb-8">
+          <h3 class="text-xl font-semibold text-gray-100 mb-3">¿Vaciar carrito?</h3>
+          <p class="text-gray-300 text-sm leading-relaxed">
+            Esta acción eliminará todos los productos de tu carrito. No podrás deshacer esta acción.
+          </p>
+        </div>
+        
+        <!-- Botones -->
+        <div class="flex gap-3">
+          <button 
+            id="cancel-clear" 
+            class="flex-1 bg-dark-600 text-gray-300 px-4 py-3 rounded-lg font-medium hover:bg-dark-500 transition-colors"
+          >
+            Cancelar
+          </button>
+          <button 
+            id="confirm-clear" 
+            class="flex-1 bg-red-500 text-white px-4 py-3 rounded-lg font-medium hover:bg-red-600 transition-colors"
+          >
+            Sí, vaciar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script type="module">
+  import { cartStore } from '/src/scripts/cart-store.js';
+  
+  const WHATSAPP_NUMBER = "5493816330113"; // Tu número de WhatsApp
+
+  // Elementos del DOM
+  const emptyCart = document.getElementById('empty-cart');
+  const cartContent = document.getElementById('cart-content');
+  const cartItems = document.getElementById('cart-items');
+  const cartTotal = document.getElementById('cart-total');
+  const cartBadge = document.getElementById('cart-badge');
+  const clearCartBtn = document.getElementById('clear-cart');
+  const checkoutBtn = document.getElementById('checkout-whatsapp');
+  
+  // Elementos del modal
+  const confirmModal = document.getElementById('confirm-modal');
+  const cancelClearBtn = document.getElementById('cancel-clear');
+  const confirmClearBtn = document.getElementById('confirm-clear');
+
+  // Función para formatear precio
+  function formatPrice(price) {
+    return new Intl.NumberFormat('es-AR', {
+      style: 'currency',
+      currency: 'ARS'
+    }).format(price);
+  }
+
+  // Función para crear elemento de producto en el carrito
+  function createCartItemElement(item) {
+    const subtotal = item.precio * item.cantidad;
+    
+    return `
+      <div class="p-6 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+        <!-- Icono del producto -->
+        <div class="w-16 h-16 bg-gradient-to-r from-turquoise-500 to-green-modern-500 rounded-lg flex items-center justify-center flex-shrink-0">
+          ${getProductIcon(item.categoria)}
+        </div>
+        
+        <!-- Información del producto -->
+        <div class="flex-grow">
+          <h3 class="font-semibold text-gray-100">${item.nombre}</h3>
+          <p class="text-sm text-gray-300">${item.descripcion}</p>
+          <p class="text-turquoise-400 font-medium">${formatPrice(item.precio)} c/u</p>
+        </div>
+        
+        <!-- Controles de cantidad -->
+        <div class="flex items-center gap-3">
+          <button class="quantity-btn bg-dark-600 hover:bg-dark-500 text-gray-300 w-8 h-8 rounded-full flex items-center justify-center transition-colors" 
+                  data-action="decrease" data-id="${item.id}">-</button>
+          <span class="w-8 text-center font-semibold text-gray-100">${item.cantidad}</span>
+          <button class="quantity-btn bg-dark-600 hover:bg-dark-500 text-gray-300 w-8 h-8 rounded-full flex items-center justify-center transition-colors" 
+                  data-action="increase" data-id="${item.id}">+</button>
+        </div>
+        
+        <!-- Subtotal y eliminar -->
+        <div class="flex flex-col items-end gap-2">
+          <div class="text-lg font-bold text-gray-100">${formatPrice(subtotal)}</div>
+          <button class="remove-item text-red-400 hover:text-red-300 text-sm transition-colors" data-id="${item.id}">
+            🗑️ Eliminar
+          </button>
+        </div>
+      </div>
+    `;
+  }
+
+  // Función para obtener icono por categoría
+  function getProductIcon(categoria) {
+    const icons = {
+      'auriculares': '<span class="text-white text-2xl">🎧</span>',
+      'parlantes': '<span class="text-white text-2xl">🔊</span>',
+      'smartwatch': '<span class="text-white text-2xl">⌚</span>',
+      'cargadores': '<span class="text-white text-2xl">🔌</span>',
+      'usb': '<span class="text-white text-2xl">🔗</span>'
+    };
+    return icons[categoria] || '<span class="text-white text-2xl">📦</span>';
+  }
+
+  // Función para actualizar la vista del carrito
+  function updateCartView() {
+    const cart = cartStore.getCart();
+    const totalItems = cartStore.getTotalItems();
+    const totalPrice = cartStore.getTotalPrice();
+
+    // Actualizar badge
+    if (totalItems > 0) {
+      cartBadge.textContent = totalItems;
+      cartBadge.classList.remove('hidden');
+    } else {
+      cartBadge.classList.add('hidden');
+    }
+
+    if (cart.length === 0) {
+      // Mostrar carrito vacío
+      emptyCart.classList.remove('hidden');
+      cartContent.classList.add('hidden');
+    } else {
+      // Mostrar productos
+      emptyCart.classList.add('hidden');
+      cartContent.classList.remove('hidden');
+      
+      // Renderizar productos
+      cartItems.innerHTML = cart.map(item => createCartItemElement(item)).join('');
+      
+      // Actualizar total
+      cartTotal.textContent = formatPrice(totalPrice);
+    }
+  }
+
+  // Manejar clicks en el carrito
+  document.addEventListener('click', (e) => {
+    // Botones de cantidad
+    if (e.target.classList.contains('quantity-btn')) {
+      const action = e.target.getAttribute('data-action');
+      const productId = parseInt(e.target.getAttribute('data-id'));
+      const cart = cartStore.getCart();
+      const item = cart.find(item => item.id === productId);
+      
+      if (item) {
+        if (action === 'increase') {
+          cartStore.updateQuantity(productId, item.cantidad + 1);
+        } else if (action === 'decrease') {
+          cartStore.updateQuantity(productId, Math.max(0, item.cantidad - 1));
+        }
+        updateCartView();
+      }
+    }
+    
+    // Eliminar producto
+    if (e.target.classList.contains('remove-item')) {
+      const productId = parseInt(e.target.getAttribute('data-id'));
+      cartStore.removeProduct(productId);
+      updateCartView();
+    }
+  });
+
+  // Funciones del modal
+  function showConfirmModal() {
+    confirmModal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden'; // Prevenir scroll
+  }
+  
+  function hideConfirmModal() {
+    confirmModal.classList.add('hidden');
+    document.body.style.overflow = 'auto'; // Restaurar scroll
+  }
+  
+  // Vaciar carrito
+  clearCartBtn.addEventListener('click', () => {
+    showConfirmModal();
+  });
+  
+  // Eventos del modal
+  cancelClearBtn.addEventListener('click', () => {
+    hideConfirmModal();
+  });
+  
+  confirmClearBtn.addEventListener('click', () => {
+    cartStore.clearCart();
+    updateCartView();
+    hideConfirmModal();
+  });
+  
+  // Cerrar modal al hacer click en el overlay
+  confirmModal.addEventListener('click', (e) => {
+    if (e.target === confirmModal) {
+      hideConfirmModal();
+    }
+  });
+
+  // Enviar por WhatsApp
+  checkoutBtn.addEventListener('click', () => {
+    const cart = cartStore.getCart();
+    if (cart.length === 0) {
+      alert('Tu carrito está vacío');
+      return;
+    }
+
+    const message = cartStore.generateWhatsAppMessage();
+    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
+    
+    // Abrir WhatsApp
+    window.open(whatsappUrl, '_blank');
+    
+    // Opcional: limpiar carrito después de enviar
+    setTimeout(() => {
+      if (confirm('¿Quieres vaciar el carrito después de enviar el pedido?')) {
+        cartStore.clearCart();
+        updateCartView();
+      }
+    }, 1000);
+  });
+
+  // Inicializar vista al cargar la página
+  document.addEventListener('DOMContentLoaded', () => {
+    updateCartView();
+    
+    // Suscribirse a cambios del carrito
+    cartStore.subscribe(() => {
+      updateCartView();
+    });
+  });
+</script>
+
+<style>
+  .quantity-btn:hover {
+    transform: scale(1.1);
+  }
+</style>

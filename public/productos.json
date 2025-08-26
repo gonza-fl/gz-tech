@@ -1,0 +1,134 @@
+{
+  "productos": [
+    {
+      "id": 1,
+      "nombre": "Parlante Mini Valija 3” MODS-907",
+      "categoria": "parlantes",
+      "precio": 17800,
+      "imagenes": [
+        "/images/parlante-mini-valija.webp",
+        "/images/parlante-mini-valija-2.webp",
+        "/images/parlante-mini-valija-3.webp"
+      ],
+      "descripcion": "Parlante portátil tipo valija con sonido potente y diseño compacto.",
+      "caracteristicas": [
+        "3 pulgadas",
+        "Diseño valija",
+        "Bluetooth",
+        "Color negro"
+      ]
+    },
+    {
+      "id": 2,
+      "nombre": "Parlante 2'' BOCH MODS-903",
+      "categoria": "parlantes",
+      "precio": 13000,
+      "imagenes": [
+        "/images/parlante-boch.webp",
+        "/images/parlante-boch-2.webp",
+        "/images/parlante-boch-3.webp"
+      ],
+      "descripcion": "Parlante ultra compacto ideal para llevar a todas partes.",
+      "caracteristicas": [
+        "2 pulgadas",
+        "Bluetooth",
+        "Diseño moderno",
+        "Portátil"
+      ]
+    },
+    {
+      "id": 3,
+      "nombre": "Smartwatch M8",
+      "categoria": "smartwatch",
+      "precio": 11800,
+      "imagenes": [
+        "/images/smartwatch-m8-3.webp",
+        "/images/smartwatch-m8.webp",
+        "/images/smartwatch-m8-2.webp"
+      ],
+      "descripcion": "Reloj inteligente con monitor de ritmo cardíaco y múltiples funciones deportivas.",
+      "caracteristicas": [
+        "Pantalla táctil",
+        "Notificaciones",
+        "Sensor cardíaco",
+        "Bluetooth"
+      ]
+    },
+    {
+      "id": 4,
+      "nombre": "Smartwatch D18 Redondo (Violeta)",
+      "categoria": "smartwatch",
+      "precio": 12500,
+      "imagenes": [
+        "/images/smartwatch-d18.webp",
+        "/images/smartwatch-d18-2.webp",
+        "/images/smartwatch-d18-3.webp"
+      ],
+      "descripcion": "Smartwatch con diseño circular, control de pasos y estilo elegante.",
+      "caracteristicas": [
+        "Pantalla circular",
+        "Conteo de pasos",
+        "Color violeta",
+        "Compatible Android/iOS"
+      ]
+    },
+    {
+      "id": 5,
+      "nombre": "Manos Libres BT simil AKG MOD 83",
+      "categoria": "auriculares",
+      "precio": 10640,
+      "imagenes": [
+        "/images/manos-libres-akg.webp",
+        "/images/manos-libres-akg-2.webp",
+        "/images/manos-libres-akg-3.webp"
+      ],
+      "descripcion": "Auriculares Bluetooth con diseño similar a AKG, ideal para música y llamadas.",
+      "caracteristicas": [
+        "Bluetooth",
+        "Estilo AKG",
+        "Micrófono",
+        "Alta fidelidad"
+      ]
+    },
+    {
+      "id": 6,
+      "nombre": "Cable USB Tipo C 5.1A CB-562",
+      "categoria": "usb",
+      "precio": 2300,
+      "imagenes": [
+        "/images/cable-tipo-c.webp"
+      ],
+      "descripcion": "Cable de carga rápida tipo C con recubrimiento engomado.",
+      "caracteristicas": [
+        "USB A a Tipo C",
+        "Carga rápida 5.1A",
+        "Recubrimiento engomado",
+        "1 metro"
+      ]
+    },
+    {
+      "id": 7,
+      "nombre": "Cargador 220V + Cable Tipo V8 (RUSH)",
+      "categoria": "cargadores",
+      "precio": 6200,
+      "imagenes": [
+        "/images/cargador-v8.webp",
+        "/images/cargador-v8-2.webp"
+      ],
+      "descripcion": "Cargador rápido de 4.8A con cable incluido tipo V8.",
+      "caracteristicas": ["220V", "4.8A", "Incluye cable V8", "Marca RUSH"]
+    },
+    {
+      "id": 8,
+      "nombre": "Cargador 220V + Cable Tipo C (RUSH)",
+      "categoria": "cargadores",
+      "precio": 6200,
+      "imagenes": [
+        "/images/cargador-tipo-c.webp",
+        "/images/cargador-tipo-c-2.webp"
+      ],
+      "descripcion": "Cargador rápido de 4.8A con cable incluido tipo C.",
+      "caracteristicas": ["220V", "4.8A", "Incluye cable Tipo C", "Marca RUSH"]
+    }
+  ]
+}

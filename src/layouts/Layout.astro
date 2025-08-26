@@ -1,0 +1,26 @@
+---
+import '../styles/global.css';
+---
+
+<!doctype html>
+<html lang="es-AR">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/png" href="/logo.png" />
+		<meta name="generator" content={Astro.generator} />
+		<title>GZ Tech - Productos Tecnológicos de Calidad</title>
+		<meta name="author" content="Gz dev" />
+		<meta name="description" content="Descubre nuestra amplia gama de productos tecnológicos a los mejores precios." />
+		<!-- Google Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+		
+		<!-- Particles.js -->
+		<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+	</head>
+	<body class="bg-dark-800 text-gray-100 antialiased">
+		<slot />
+	</body>
+</html>
