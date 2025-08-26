@@ -3,8 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import ProductGrid from '../components/ProductGrid.tsx';
 
 // Fetch productos desde el JSON
-const response = await fetch('http://localhost:4321/productos.json');
-const data = await response.json();
+import data from '../../public/productos.json'
 const productos = data.productos;
 ---
 
@@ -36,7 +35,7 @@ const productos = data.productos;
             🛒 Carrito
             <span
               id='cart-badge'
-              class='absolute -top-1 -right-1 bg-turquoise-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center hidden'
+              class='absolute -top-1 -right-1 bg-turquoise-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center'
               >0</span
             >
           </a>
@@ -73,9 +72,9 @@ const productos = data.productos;
       >
         Productos tecnológicos a precios accesibles
       </p>
-      <p class='text-xl md:text-2xl text-turquoise-300 font-semibold'
-        >¡Tu próximo upgrade te está esperando!</p
-      >
+      <p class='text-xl md:text-2xl text-turquoise-300 font-semibold'>
+        ¡Tu próximo upgrade te está esperando!
+      </p>
     </div>
   </section>
 
