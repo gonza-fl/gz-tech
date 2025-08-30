@@ -2,18 +2,12 @@
 import Header from '../components/Header.astro';
 import Layout from '../layouts/Layout.astro';
 
-// Función para formatear precio
-// function formatPrice(price) {
-//   return new Intl.NumberFormat('es-AR', {
-//     style: 'currency',
-//     currency: 'ARS',
-//   }).format(price);
-// }
+const { PUBLIC_WHATSAPP_NUMBER } = import.meta.env;
 ---
 
 <Layout>
   <!-- Header -->
-  <Header selected="cart"/>
+  <Header selected='cart' />
 
   <!-- Contenido del Carrito -->
   <section class='py-16 bg-dark-800 min-h-screen'>
@@ -154,10 +148,8 @@ import Layout from '../layouts/Layout.astro';
   </div>
 </Layout>
 
-<script type='module'>
+<script type='module' define:vars={{ WHATSAPP_NUMBER: PUBLIC_WHATSAPP_NUMBER }}>
   import { cartStore } from '/src/scripts/cart-store.js';
-
-  const WHATSAPP_NUMBER = '5493816330113'; // Tu número de WhatsApp
 
   // Elementos del DOM
   const emptyCart = document.getElementById('empty-cart');
@@ -341,7 +333,7 @@ import Layout from '../layouts/Layout.astro';
 
     // Opcional: limpiar carrito después de enviar
     setTimeout(() => {
-      if (confirm('¿Quieres vaciar el carrito después de enviar el pedido?')) {
+      if (confirm()) {
         cartStore.clearCart();
         updateCartView();
       }
