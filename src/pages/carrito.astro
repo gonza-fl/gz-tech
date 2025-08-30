@@ -149,7 +149,7 @@ const { PUBLIC_WHATSAPP_NUMBER } = import.meta.env;
 </Layout>
 
 <script type='module' define:vars={{ WHATSAPP_NUMBER: PUBLIC_WHATSAPP_NUMBER }}>
-  import { cartStore } from '/src/scripts/cart-store.js';
+  import { cartStore } from '../scripts/cart-store.js';
 
   // Elementos del DOM
   const emptyCart = document.getElementById('empty-cart');
