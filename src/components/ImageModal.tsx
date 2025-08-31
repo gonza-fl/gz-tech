@@ -97,18 +97,30 @@ const ImageModal: React.FC<ImageModalProps> = ({
           <div className='flex-1 relative flex items-center justify-center p-4 min-h-0'>
             <div className='relative w-full h-full max-w-3xl max-h-[60vh] flex-col items-center justify-center bg-white rounded-lg'>
               {/* Header del Modal */}
-              <div className='flex justify-between items-center p-2 text-gray-600'>
+              <div className='flex justify-between items-start p-2 text-gray-600'>
                 <div>
-                  <h3 className='text-xl font-semibold'>{producto.nombre}</h3>
+                  <h3 className='text-xl font-semibold max-w-[90%]'>{producto.nombre}</h3>
                   <p className='text-sm text-black-300'>
                     {currentImageIndex + 1} de {producto.imagenes.length}
                   </p>
                 </div>
                 <button
                   onClick={onClose}
-                  className='hover:text-gray-300 text-3xl font-bold relative bottom-3 right-1'
+                  aria-label='Cerrar'
+                  className='absolute top-2 right-2 p-2 rounded-full bg-red-500 hover:bg-red-600 transition-colors shadow-md focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2'
                 >
-                  ×
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    className='h-4 w-4 text-white'
+                    viewBox='0 0 20 20'
+                    fill='currentColor'
+                  >
+                    <path
+                      fillRule='evenodd'
+                      d='M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z'
+                      clipRule='evenodd'
+                    />
+                  </svg>
                 </button>
               </div>
               <div className='w-full flex justify-center'>

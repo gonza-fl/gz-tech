@@ -1,8 +1,9 @@
 ---
 const { selected } = Astro.props;
+import { ShoppingCartIcon } from '@heroicons/react/24/outline';
 ---
 
-<nav class='bg-dark-900 shadow-lg sticky top-0 z-50 flex-col'>
+<nav class='bg-dark-900 shadow-lg sticky top-[-1px] z-50 flex-col'>
   <div class='flex items-center justify-center'>
     <a href='/' class='flex items-center py-2 group'>
       <img src='/logo.png' alt='GZ Tech' class='h-16 md:h-18 w-auto' />
@@ -21,14 +22,19 @@ const { selected } = Astro.props;
     >
     <a
       href='/carrito'
-      class=`${selected === 'cart' && ('text-turquoise-400 px-3 py-2 text-sm font-medium border-b-2 border-turquoise-400') || ' text-gray-300 hover:text-turquoise-400 px-3 py-2 text-sm font-medium transition-colors'} relative`
+      class={`${
+        selected === 'cart'
+          ? 'text-turquoise-400 px-3 py-2 text-sm font-medium border-b-2 border-turquoise-400'
+          : 'text-gray-300 hover:text-turquoise-400 px-3 py-2 text-sm font-medium transition-colors'
+      } relative flex items-center gap-1`}
     >
-      🛒 Carrito
+      <ShoppingCartIcon className='h-7 w-7' />
       <span
         id='cart-badge'
         class='absolute -top-1 -right-1 bg-turquoise-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center'
-        >0</span
       >
+        0
+      </span>
     </a>
   </div>
 </nav>

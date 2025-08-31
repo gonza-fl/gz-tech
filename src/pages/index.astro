@@ -6,6 +6,8 @@ import Header from '../components/Header.astro';
 // Fetch productos desde el JSON
 import data from '../../public/productos.json';
 const productos = data.productos;
+const { PUBLIC_WHATSAPP_NUMBER: WHATSAPP_NUMBER } = import.meta.env;
+
 ---
 
 <Layout>
@@ -103,16 +105,18 @@ const productos = data.productos;
   >
     <div class='max-w-4xl mx-auto text-center px-4'>
       <h2 class='text-3xl font-bold text-white mb-4'>
-        ¿No encontraste lo que buscabas?
+        Consultá por nuestro catalogo completo! 💪🏽
       </h2>
       <p class='text-turquoise-100 mb-8'>
         Contáctanos y te ayudamos a encontrar el producto perfecto
       </p>
-      <button
-        class='bg-white text-turquoise-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors'
+      <a
+        href=`https://wa.me/${WHATSAPP_NUMBER}?text=Hola!%20Estuve%20viendo%20el%20catálogo%20y%20me%20gustaría%20consultar%20por%20más%20productos.`
+        target='_blank'
+        class='inline-block bg-white text-turquoise-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors'
       >
         Contactar Ahora
-      </button>
+      </a>
     </div>
   </section>
 

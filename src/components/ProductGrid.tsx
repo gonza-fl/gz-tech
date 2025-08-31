@@ -79,7 +79,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ productos }) => {
           >
             {/* Imagen de Portada */}
             <div 
-              className="h-64 md:h-56 lg:h-64 bg-gradient-to-br from-dark-600 to-dark-700 relative overflow-hidden group cursor-pointer"
+              className="h-full md:h-56 lg:h-64 bg-gradient-to-br from-dark-600 to-dark-700 relative overflow-hidden group cursor-pointer"
               onClick={() => openImageModal(producto)}
             >
               {producto.imagenes && producto.imagenes.length > 0 ? (
@@ -115,7 +115,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ productos }) => {
             </div>
             
             {/* Contenido */}
-            <div className="p-6 flex flex-col h-full">
+            <div className="p-6 flex flex-col h-[20rem]">
               <h3 className="text-lg font-semibold text-gray-100 mb-2">{producto.nombre}</h3>
               <p className="text-gray-300 text-sm mb-3 line-clamp-2 flex-grow">{producto.descripcion}</p>
               
@@ -142,7 +142,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ productos }) => {
               
               {/* Botón */}
               <button 
-                className="w-full bg-gradient-to-r from-turquoise-500 to-green-modern-500 text-white px-4 py-3 rounded-lg text-sm font-medium hover:from-turquoise-600 hover:to-green-modern-600 transition-all transform hover:scale-105"
+                className="w-full bg-gradient-to-r from-turquoise-500 to-green-modern-500 text-white px-4 py-3 rounded-lg text-xl font-medium hover:from-turquoise-600 hover:to-green-modern-600 transition-all transform hover:scale-105"
                 onClick={(e) => addToCart(producto, e)}
               >
                 Agregar al carrito
