@@ -1,4 +1,4 @@
-import { cartStore } from '../scripts/cart-store.js';
+import { cartStore } from './cart-store.js';
 
 // Elementos del DOM
 const emptyCart = document.getElementById('empty-cart');

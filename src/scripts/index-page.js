@@ -1,4 +1,4 @@
-import { cartStore } from '../scripts/cart-store.js';
+import { cartStore } from './cart-store.js';
 
 // Exponer cartStore globalmente para el componente React
 window.cartStore = cartStore;
