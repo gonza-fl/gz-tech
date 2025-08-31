@@ -2,7 +2,6 @@
 import Layout from '../layouts/Layout.astro';
 import ProductGrid from '../components/ProductGrid.tsx';
 import Header from '../components/Header.astro';
-import idxPageUrl from '../scripts/index-page.js?url';
 
 // Fetch productos desde el JSON
 import data from '../../public/productos.json';
@@ -138,9 +137,7 @@ const productos = data.productos;
   </svg>
 </Layout>
 
-<script type='module'>
-  import '../scripts/index-page.js';
-</script>
+<script type='module' src='/js/index-page.js'></script>
 
 <style>
   .hero {
