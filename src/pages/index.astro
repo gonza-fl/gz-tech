@@ -2,9 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import ProductGrid from '../components/ProductGrid.tsx';
 import Header from '../components/Header.astro';
-
-const cartPageUrl = new URL('../scripts/index-page.js', import.meta.url)
-  .pathname;
+import idxPageUrl from '../scripts/index-page.js?url';
 
 // Fetch productos desde el JSON
 import data from '../../public/productos.json';
@@ -140,7 +138,9 @@ const productos = data.productos;
   </svg>
 </Layout>
 
-<script type='module' src={cartPageUrl}></script>
+<script type='module'>
+  import '../scripts/index-page.js';
+</script>
 
 <style>
   .hero {
