@@ -2,7 +2,8 @@
 import Header from '../components/Header.astro';
 import Layout from '../layouts/Layout.astro';
 
-import cartPageUrl from '../scripts/cart-page.js?url';
+const cartPageUrl = new URL('../scripts/cart-page.js', import.meta.url)
+  .pathname;
 
 const { PUBLIC_WHATSAPP_NUMBER } = import.meta.env;
 ---
